@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Random;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class Servidor implements Constantes {
     public static void main(String[] args) throws Exception {
@@ -45,6 +49,8 @@ public class Servidor implements Constantes {
                 cliente.close();
             }
 
+            registar();
+
             servidor.close();
 
         } while (!servidor.isClosed());
@@ -76,4 +82,14 @@ public class Servidor implements Constantes {
         }
     }
 
+
+    private static void registar() throws Exception{
+        Logger logger = Logger.getLogger("miLog");
+        FileHandler fh = new FileHandler("loggeo.log", true);
+        SimpleFormatter formatter = new SimpleFormatter();
+        logger.addHandler(fh);
+        fh.setFormatter(formatter);
+
+        logger.log(Level.INFO, "UwU");
+    } 
 }
